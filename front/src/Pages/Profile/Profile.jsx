@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import styles from './Perfil.module.css'; 
 
 export default function Profile() {
-  // 1. Estado para guardar os dados reais do utilizador
   const [utilizador, setUtilizador] = useState(null);
   const [erro, setErro] = useState('');
   
@@ -19,7 +18,7 @@ export default function Profile() {
           return;
         }
 
-        const resposta = await fetch('http://localhost:5000/api/user/profile', {
+        const resposta = await fetch('http://localhost:5000/api/user/getprofile', {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`,

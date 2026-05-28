@@ -22,7 +22,7 @@ export default function AdminView() {
           return;
         }
 
-        const respostaUsers = await fetch('http://localhost:5000/api/user/all', {
+        const respostaUsers = await fetch('http://localhost:5000/api/user/getallprofiles', {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`,

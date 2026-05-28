@@ -18,7 +18,7 @@ export default function AdminUsers() {
           return;
         }
 
-        const resposta = await fetch('http://localhost:5000/api/user/all', {
+        const resposta = await fetch('http://localhost:5000/api/user/getallprofiles', {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -48,7 +48,7 @@ export default function AdminUsers() {
       try {
         const token = localStorage.getItem('token');
         
-        const resposta = await fetch(`http://localhost:5000/api/user/${id}`, {
+        const resposta = await fetch(`http://localhost:5000/api/user/deleteprofile${id}`, {
           method: 'DELETE',
           headers: {
             'Authorization': `Bearer ${token}`
