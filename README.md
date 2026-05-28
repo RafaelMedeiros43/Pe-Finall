@@ -63,3 +63,4 @@ Foi utilizado o mySQL e o Sequelize para guardar os valores dos utilizadores
 | PUT     | /api/user/profile    | authenticateToken                       | Atualiza os dados do perfil de um utilizador |
 | GET     | /api/user/all        | authenticateToken + authorizeAdmin      | Lista todos os utilizadores guardados na base de dados |
 | DELETE  | /api/user/:id        | authenticateToken + authorizeAdmin      | Elimina um utilizador com o id especifico |
+| GET     | /api/event/
