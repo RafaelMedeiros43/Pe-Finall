@@ -5,7 +5,7 @@ const { authorizeAdmin } = require('../middlewares/authMiddleware');
 const { authenticateToken } = require('../middlewares/authMiddleware');
 
 router.post('/create', authenticateToken, authorizeAdmin, eventController.createEvent);
-router.get('/all',authenticateToken, authorizeAdmin, eventController.getAllEvents);
+router.get('/all',authenticateToken, eventController.getAllEvents);
 router.put('/update/:id',authenticateToken, authorizeAdmin, eventController.updateEvent);
 router.delete('/delete/:id', authenticateToken, authorizeAdmin, eventController.deleteEvent);
 
