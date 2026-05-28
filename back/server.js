@@ -6,7 +6,7 @@ const User = require('./src/models/User');
 const authRoutes = require('./src/routes/authRoutes');
 const userController = require('./src/controllers/userController');
 const userRoutes = require('./src/routes/userRoutes');
-
+const eventRoutes = require('./src/routes/eventRoutes');
 dotenv.config();
 
 const app = express();
@@ -17,9 +17,10 @@ app.use(express.json());
 // 
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
+app.use('/api/event', eventRoutes);
 
 app.get("/", (req, res) => {
-    res.json({ message: "API do Centro Academico Clínico com MySQL" });
+    res.json({ message: "API do CACA com MySQL" });
 });
 
 const PORT = process.env.PORT || 5000;
