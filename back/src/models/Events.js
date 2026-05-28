@@ -16,7 +16,7 @@ const Event = sequelize.define('Event', {
         allowNull: false
     },
     data: {
-        type: DataTypes.DATE,
+        type: DataTypes.DATEONLY,
         allowNull: false
     },
     hora: {
