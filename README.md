@@ -28,7 +28,7 @@ npm run dev
 
 
 ## Estrutura do projeto
-
+```text
 caca-FinalBackEnd/
 ├── node_modules/         
 ├── src/
@@ -46,7 +46,7 @@ caca-FinalBackEnd/
 ├── package.json
 ├── README.md
 └── server.js
-
+```
 
 ## DATABASE
 
@@ -55,10 +55,11 @@ Foi utilizado o mySQL e o Sequelize para guardar os valores dos utilizadores
 
 ## ENDPOINTS implementadas
 
-Métodos |       Endpoint        |               Middleware               | Descrição
-  POST  |   /api/auth/register  |                 Público                | Permite registar novos utilizadores no site
-  POST  |   /api/auth/login     |                 Público                | Permite logar utilizadores no site
-  GET   |   /api/user/profile   |            authenticateToken           | Retorna os dados do perfil de um utilizador
-  PUT   |   /api/user/profile   |            authenticateToken           | Atualiza os dados do perfil de um utilizador
-  GET   |   /api/user/all       |   authenticateToken + authorizeAdmin   | Lista todos os utilizadores guardados na base de dados
- DELETE |   /api/user/:id       |   authenticateToken + authorizeAdmin   | Elimina um utilizador com o id especifico
+| Métodos |       Endpoint        |                Middleware               | Descrição |
+| :---    | :---                 | :---                                    | :--- |
+| POST    | /api/auth/register   | Público                                 | Permite registar novos utilizadores no site |
+| POST    | /api/auth/login      | Público                                 | Permite logar utilizadores no site |
+| GET     | /api/user/profile    | authenticateToken                       | Retorna os dados do perfil de um utilizador |
+| PUT     | /api/user/profile    | authenticateToken                       | Atualiza os dados do perfil de um utilizador |
+| GET     | /api/user/all        | authenticateToken + authorizeAdmin      | Lista todos os utilizadores guardados na base de dados |
+| DELETE  | /api/user/:id        | authenticateToken + authorizeAdmin      | Elimina um utilizador com o id especifico |
