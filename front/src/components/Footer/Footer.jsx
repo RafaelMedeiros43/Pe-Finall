@@ -1,16 +1,14 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
+
 import { LanguageContext } from '../../contexts/LanguageContext';
-import { useAdminPanel } from '../../contexts/AdminPanelContext';
 import NewsletterForm from '../Footer/SubComponents/NewsletterForm';
 
 export default function Footer() {
   const { t } = useContext(LanguageContext);
-  const { setShowAdmin } = useAdminPanel();
+  const utilizadorLogado = { nome: "João", role: "admin" };
 
-  const handleAdminToggle = (e) => {
-    e.preventDefault();
-    setShowAdmin(prev => !prev);
-  };
+
 
   return (
     <footer id="contactos" className="footer">
@@ -43,10 +41,15 @@ export default function Footer() {
       </div>
       
       <div className="container footer-bottom">
-        <p>
-          &copy; 2026 Centro Académico Clínico dos Açores. Todos os direitos reservados. |{' '}
-          <a href="#admin-section" id="toggle-admin" onClick={handleAdminToggle} aria-label="Alternar para painel de administração de eventos">Admin</a>
-        </p>
+        {utilizadorLogado && utilizadorLogado.role === 'admin' && (
+            <p>
+              &copy; 2026 Centro Académico Clínico dos Açores. Todos os direitos reservados.
+              {' | '}
+              <Link to="/admin" id="toggle-admin" aria-label="Alternar para painel de administração">
+                Admin
+              </Link>
+            </p>
+          )}
       </div>
     </footer>
   );

@@ -21,14 +21,17 @@ import Services from './components/Servicos/Servicos';
 import Eventos from './components/Eventos/Eventos';
 import Noticias from './components/Noticias/Noticias';
 import Localizacao from './components/Localizacao/Localizacao';
-import Admin from './components/Admin/Admin';
 
 import Login from './Pages/Login/Login';
 import Register from './Pages/Register/Register';
 import Profile from './Pages/Profile/Profile'
+import AdminView from './Pages/Admin/View/AdminView'
+import AdminEventos from './Pages/Admin/Eventos/AdminEventos'
+import AdminUsers from './Pages/Admin/Users/AdminUsers'
 
 import MainLayout from './Layouts/MainLayout';
 import AutenticationLayout from './Layouts/AutenticationLayout';
+import AdminLayout from './Layouts/AdminLayout'
 
 function App() {
   return (
@@ -43,26 +46,31 @@ function App() {
                     <main>
                       <Routes>
                         <Route element={<MainLayout />}>
-                <Route path="/" element={
-                  <>
-                    <Hero />
-                    <About />
-                    <Graficos />
-                    <Partners />
-                    <Services />
-                    <Eventos />
-                    <Noticias />
-                    <Localizacao />
-                    <Admin />
-                  </>
-                } />
-              </Route>
+                          <Route path="/" element={
+                            <>
+                              <Hero />
+                              <About />
+                              <Graficos />
+                              <Partners />
+                              <Services />
+                              <Eventos />
+                              <Noticias />
+                              <Localizacao />
+                              
+                            </>
+                          } />
+                        </Route>
 
-              <Route element={<AutenticationLayout />}>
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/profile" element={<Profile />} />                
-              </Route>
+                        <Route element={<AutenticationLayout />}>
+                          <Route path="/login" element={<Login />} />
+                          <Route path="/register" element={<Register />} />
+                          <Route path="/profile" element={<Profile />} />                
+                        </Route>
+                        <Route element={<AdminLayout />}>
+                          <Route path ="/admin" element={<AdminView/>}/>
+                          <Route path ="/admin/users" element={<AdminUsers/>}/>
+                          <Route path ="/admin/eventos" element={<AdminEventos/>}/>
+                        </Route>
                       </Routes>
                     </main>
                   </div>

@@ -40,7 +40,7 @@ export default function Register() {
             <button type="submit" className={styles.button}>Criar Conta</button>
           </form>
 
-          <p style={{ marginTop: '20px' }}>
+          <p>
             Já tens uma conta? <Link to="/login">Entra aqui</Link>
           </p>
           <div className={styles.header}>

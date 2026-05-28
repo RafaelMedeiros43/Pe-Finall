@@ -59,7 +59,7 @@ export default function HeaderAutenticacao() {
           <strong>{t('header_title', 'Centro Académico Clínico dos Açores')}</strong>
         </span>
 
-        <nav className={`nav-links ${isMenuActive ? 'active' : ''}`} id="nav-links" ref={navRef}>          
+        <nav className="nav-links" id="nav-links" ref={navRef}>          
           <ul>
             {/* DROPDOWN DE IDIOMAS */}
             <li className="lang-dropdown-container" ref={dropdownRef}>

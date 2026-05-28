@@ -1,11 +1,11 @@
-// src/components/Header/Header.jsx
 import React, { useState, useContext, useRef } from 'react';
 import { Link } from 'react-router-dom';
+
 import { ThemeContext } from '../../contexts/ThemeContext';
 import { LanguageContext } from '../../contexts/LanguageContext';
 import { useClickOutside } from '../../hooks/useClickOutside';
 
-export default function Header() {
+export default function HeaderAutenticacao() {
   const { theme, toggleTheme } = useContext(ThemeContext);
   const { lang, setLang, t } = useContext(LanguageContext);
   
@@ -15,23 +15,16 @@ export default function Header() {
   
   // Estado para controlar o dropdown de idiomas
   const [isLangDropdownOpen, setIsLangDropdownOpen] = useState(false);
-  const [isAuthDropdownOpen, setIsAuthDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
-  const authDropdownRef = useRef(null);
 
   const sunIcon = "☀️";
   const moonIcon = "🌙";
 
   useClickOutside(dropdownRef, () => setIsLangDropdownOpen(false));
-  useClickOutside(authDropdownRef, () => setIsAuthDropdownOpen(false));
   useClickOutside(navRef, () => setIsMenuActive(false));
 
   const handleToggleMenu = () => {
     setIsMenuActive(!isMenuActive);
-  };
-
-  const handleLinkClick = () => {
-    setIsMenuActive(false);
   };
 
   const handleLangChange = (newLang) => {
@@ -64,53 +57,16 @@ export default function Header() {
             </p>
           </div>
         </div>
-          <span className="header-text">
+        <span className="header-text">
           <strong>{t('header_title', 'Centro Académico Clínico dos Açores')}</strong>
         </span>
-        
 
-        <nav className="nav-links" id="nav-links" ref={navRef}>          
+        <nav className="nav-links"  id="nav-links" ref={navRef}>          
           <ul>
-            <li><a href="#sobre">{t('nav_sobre', 'Sobre nós')}</a></li>
-            <li><a href="#servicos">{t('nav_servicos', 'Serviços')}</a></li>
-            <li><a href="#eventos" >{t('nav_eventos', 'Eventos')}</a></li>
-            <li><a href="#noticias" >{t('nav_noticias', 'Notícias')}</a></li>
-            <li><a href="#Localizacao">{t('nav_localizacao', 'Localização')}</a></li>
-            <li>
-              <a className="contacts" href="#contactos">
-                <strong>{t('nav_contactos', 'Contacte-nos')}</strong>
-              </a>
-            </li>
-            <li className="lang-dropdown-container" ref={authDropdownRef}>
-              <div 
-                className="lang-dropdown-selected" 
-                onClick={() => setIsAuthDropdownOpen(!isAuthDropdownOpen)}
-              >
-                <span>👤 {t('nav_conta', 'Conta')}</span> 
-              </div>
-              
-              <ul 
-                className="lang-dropdown-options" 
-                style={{ display: isAuthDropdownOpen ? 'block' : 'none' }}
-              >
-                <li onClick={() => { setIsAuthDropdownOpen(false); handleLinkClick(); }}>
-                  <Link to="/login">
-                    {t('nav_login', 'Login')}
-                  </Link>
-                </li>
-                <li onClick={() => { setIsAuthDropdownOpen(false); handleLinkClick(); }}>
-                  <Link to="/register">
-                    {t('nav_registo', 'Registo')}
-                  </Link>
-                </li>
-                <li onClick={() => { setIsAuthDropdownOpen(false); handleLinkClick(); }}>
-                  <Link to="/profile">
-                    {t('nav_registo', 'Perfil')}
-                  </Link>
-                </li>
-              </ul>
-            </li>
-            
+            <li><Link to ="/">{t('nav_inicio', 'Início')}</Link></li>
+            <li><Link to ="/admin/eventos">{t('nav_eventos_admin', 'Eventos')}</Link></li>
+            <li><Link to ="/admin/users">{t('nav_users', 'Utilizadores')}</Link></li>
+
             {/* DROPDOWN DE IDIOMAS */}
             <li className="lang-dropdown-container" ref={dropdownRef}>
               <div 

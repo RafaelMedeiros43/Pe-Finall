@@ -1,0 +1,70 @@
+.adminWrapper {
+  min-height: 100vh;
+  padding: 40px 20px;
+  background-color: var(--bg-color); 
+  color: var(--text-color, #333);
+}
+
+.adminContainer {
+  max-width: 1000px;
+  margin: 0 auto;
+  background-color: var(--bg-cartao-login);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.tabelaContainer {
+  margin-top: 30px;
+  overflow-x: auto; 
+}
+
+.tabela {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.tabela th {
+  background-color: var(--accent-color1, #3371F2);
+  color: white;
+  padding: 15px;
+}
+
+.tabela td {
+  padding: 15px;
+  border-bottom: 1px solid var(--grey, #ddd);
+}
+
+.badgeAdmin, .badgeUser {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.badgeAdmin {
+  background-color: #ff4d4f;
+  color: white;
+}
+
+.badgeUser {
+  background-color: var(--accent-color, #29B89E);
+  color: white;
+}
+
+.btnApagar {
+  background-color: transparent;
+  color: #ff4d4f;
+  border: 1px solid #ff4d4f;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btnApagar:hover {
+  background-color: #ff4d4f;
+  color: white;
+}
