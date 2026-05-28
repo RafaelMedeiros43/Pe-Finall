@@ -25,6 +25,7 @@ import Admin from './components/Admin/Admin';
 
 import Login from './Pages/Login/Login';
 import Register from './Pages/Register/Register';
+import Profile from './Pages/Profile/Profile'
 
 import MainLayout from './Layouts/MainLayout';
 import AutenticationLayout from './Layouts/AutenticationLayout';
@@ -60,6 +61,7 @@ function App() {
               <Route element={<AutenticationLayout />}>
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
+                <Route path="/profile" element={<Profile />} />                
               </Route>
                       </Routes>
                     </main>

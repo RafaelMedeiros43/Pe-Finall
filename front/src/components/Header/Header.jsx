@@ -102,6 +102,11 @@ export default function Header() {
                     {t('nav_registo', 'Registo')}
                   </Link>
                 </li>
+                <li onClick={() => { setIsAuthDropdownOpen(false); handleLinkClick(); }}>
+                  <Link to="/profile">
+                    {t('nav_registo', 'Perfil')}
+                  </Link>
+                </li>
               </ul>
             </li>
             
