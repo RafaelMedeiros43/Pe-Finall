@@ -1,14 +1,56 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from './Perfil.module.css'; 
 
 export default function Profile() {
+  // 1. Estado para guardar os dados reais do utilizador
+  const [utilizador, setUtilizador] = useState(null);
+  const [erro, setErro] = useState('');
+  
+  const navigate = useNavigate();
 
-  const nomeUtilizador = "João Silva"; 
+  useEffect(() => {
+    const buscarPerfil = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        
+        if (!token) {
+          navigate('/login');
+          return;
+        }
+
+        const resposta = await fetch('http://localhost:5000/api/user/profile', {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        });
+
+        if (resposta.ok) {
+          const dados = await resposta.json();
+          setUtilizador(dados); 
+        } else {
+          localStorage.removeItem('token');
+          navigate('/login');
+        }
+      } catch (error) {
+        console.error("Erro ao buscar perfil:", error);
+        setErro('Não foi possível carregar os dados do perfil.');
+      }
+    };
+
+    buscarPerfil();
+  }, [navigate]);
 
   const handleLogout = () => {
-    console.log("Sessão terminada");
+    localStorage.removeItem('token');
+    navigate('/');
   };
+
+  if (!utilizador && !erro) {
+    return <div>A carregar perfil...</div>;
+  }
 
   return (
     <div className={styles.section}>
@@ -17,15 +59,20 @@ export default function Profile() {
         
         <div className={styles.perfilCard}>
           <div className={styles.avatar}>
-            {nomeUtilizador.charAt(0)}
+            {utilizador?.username ? utilizador.username.charAt(0).toUpperCase() : '?'}
           </div>
           
           <h2>Bem-vindo,</h2>
-          <h1 className={styles.nome}>{nomeUtilizador}</h1>
+          <h1 className={styles.nome}>{utilizador?.username}</h1>
           
           <p className={styles.mensagem}>
             Iniciaste sessão com sucesso no Centro Académico Clínico dos Açores.
           </p>
+
+          <div>
+            <p><strong>Email:</strong> {utilizador?.email}</p>
+            <p><strong>Cargo:</strong> {utilizador?.role}<span></span></p>
+          </div>
 
           <div className={styles.botoes}>
             <Link to="/" className={styles.btnVoltar}>
@@ -36,6 +83,8 @@ export default function Profile() {
               Terminar Sessão
             </button>
           </div>
+
+          {erro && <p>{erro}</p>}
         </div>
 
       </main>
