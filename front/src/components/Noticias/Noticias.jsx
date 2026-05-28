@@ -9,7 +9,7 @@ export default function Noticias() {
 
   useEffect(() => {
     const conseguirNoticias = async () => {
-      const apiKey = typeof window !== 'undefined' && window.CONFIG ? window.CONFIG.GNEWS_API_KEY : 'CHAVE_DA_API'; 
+      const apiKey = process.env.REACT_APP_NEWS_API_KEY; 
       const query = `Health`;
       const url = `https://gnews.io/api/v4/search?q=${encodeURIComponent(query)}&lang=pt&country=pt&max=6&token=${apiKey}`;
 
