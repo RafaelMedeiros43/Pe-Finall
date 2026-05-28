@@ -1,65 +1,67 @@
-# BACKEND 
-
-## Configuração
-
-### 1 - Clonar ou instalar a pasta do projeto
-### 2 - Instalar os pacotes necessários
-Abrir um terminal e colar o seguinte comando:
-npm install express sequelize mysql2 jsonwebtoken bcryptjs cors dotenv --save && npm install nodemon --save-dev
-### 3 - Abrir o mySQL Workbench e criar uma base de dados nova para o CACA
-Conectar-se no mySQL à Database e criar um schemas novo
-### 4 - .env
-Trocar o nome do ficheiro .env.example para apenas .env;
-Preencher as informações do ficheiro .env:
-### 5 - Inicializar o servidor
-Abrir o terminal e colocar o seguinte comando:
-npm run dev
+CACA - Projeto Académico (Nome do Sistema)
+Identificação do Grupo
+Nome: Miguel Matos(2024111725),Rafael Medeiros(2024109280),Tomás Couto(2024111781)
 
 
-## Pacotes utilizados
-* express
-* mysql2
-* sequelize
-* jsonwebtoken
-* bcryptjs
-* cors
-* dotenv
-* nodemon
+##Tecnologias e Justificação
+Front-end:  React.js – Escolhido pela sua arquitetura baseada em componentes, que facilita a escalabilidade e a reutilização de código.
 
+Back-end: Node.js com Express – Escolhido pela performance, escalabilidade e excelente ecossistema de bibliotecas para desenvolvimento rápido de APIs RESTful.
 
-## Estrutura do projeto
-```text
-caca-FinalBackEnd/
-├── node_modules/         
-├── src/
-│   ├── config/
-│   │   └── db.js
-│   ├── controllers/
-│   │   └── authController.js
-│   ├── middlewares/
-│   │   └── authMiddleware.js
-│   └── models/
-│       └── User.js
-├── .env
-├── .env.example
-├── .gitignore
-├── package.json
-├── README.md
-└── server.js
-```
+Base de Dados: MySQL  – Optámos por uma base de dados relacional pela integridade dos dados e facilidade de estruturação das relações entre utilizadores e recursos do CACA.
 
-## DATABASE
+Estrutura da Aplicação
+A arquitetura baseia-se num modelo cliente-servidor:
 
-Foi utilizado o mySQL e o Sequelize para guardar os valores dos utilizadores
+Front-end: Desenvolvido em React, comunica com a API via chamadas HTTP (Axios/Fetch).
 
+Back-end: Servidor Node.js que expõe endpoints protegidos por JWT.
 
-## ENDPOINTS implementadas
+Base de Dados: MySQL, persistindo os dados através do ORM Sequelize.
 
-| Métodos |       Endpoint        |                Middleware               | Descrição |
-| :---    | :---                 | :---                                    | :--- |
-| POST    | /api/auth/register   | Público                                 | Permite registar novos utilizadores no site |
-| POST    | /api/auth/login      | Público                                 | Permite logar utilizadores no site |
-| GET     | /api/user/profile    | authenticateToken                       | Retorna os dados do perfil de um utilizador |
-| PUT     | /api/user/profile    | authenticateToken                       | Atualiza os dados do perfil de um utilizador |
-| GET     | /api/user/all        | authenticateToken + authorizeAdmin      | Lista todos os utilizadores guardados na base de dados |
-| DELETE  | /api/user/:id        | authenticateToken + authorizeAdmin      | Elimina um utilizador com o id especifico |
+Funcionalidades Implementadas
+Gestão de Utilizadores: Sistema completo de autenticação (Login/Registo) , utilizando bcryptjs para hashing de passwords e jsonwebtoken para controlo de sessões.
+
+Perfil do Utilizador: Funcionalidade de leitura e atualização de dados de perfil, protegida por middleware de autenticação.
+
+Integrações: Implementação de serviços externos (Google Maps e Gnews) para enriquecimento do dashboard .
+
+##Como Correr a Aplicação
+Back-end:
+Navega para a pasta caca-FinalBackEnd/.
+
+Instala dependências: npm install.
+
+Configura o ficheiro .env com as tuas credenciais de base de dados.
+
+Inicia o servidor: npm run dev.
+
+Front-end:
+Navega para a pasta do front-end.
+
+Instala dependências: npm install.
+
+Inicia a aplicação: npm start.
+
+##Decisões de Design e Desafios
+Desafio:O principal obstáculo técnico foi a comunicação entre o cliente (React.js) e o servidor (Node.js/Express).
+
+Solução: 
+
+Interceção de Requests: Implementação de um interceptor no Axios (no front-end) para injetar automaticamente o JWT Token no header Authorization de todas as chamadas para a API.
+
+Tratamento de Erros: Criação de um sistema de tratamento de erros global que garante que, se for inválido, o utilizador seja redirecionado para a página de login, mantendo a integridade da aplicação.
+
+##Acessibilidade, Responsividade e Segurança
+Acessibilidade:  Utilização de atributos aria-label e contraste de cores adequado.
+
+Responsividade: Grid CSS para garantir que a interface se adapta a dispositivos móveis e desktop.
+
+Segurança: Uso de cors para controlo de acesso, hashing de passwords (bcryptjs) e validação de tokens (jsonwebtoken).
+
+##APIs Externas
+Google Maps API: Integrada para exibir a localização do CACA.
+
+Gnews API: Utilizada para apresentar notícias académicas relevantes.
+
+Integração: As APIs são chamadas via axios no front-end, garantindo que as chaves de API sejam mantidas em variáveis de ambiente (.env).
