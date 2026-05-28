@@ -33,10 +33,10 @@ export default function Localizacao() {
 
     const loadGoogleMapsAPI = () => {
       //Vai buscar a chave ao config
-      const apiKey = typeof window !== 'undefined' && window.CONFIG ? window.CONFIG.GOOGLE_MAPS_API_KEY : '';
+      const apiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
       
       if (!apiKey) {
-        console.error("Google Maps API key não foi encontrada no config.js");
+        console.error("Google Maps API key não foi encontrada no .env");
         return;
       }
 
