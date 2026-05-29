@@ -1,6 +1,5 @@
 import React, { useContext, useRef, useEffect, useState } from 'react';
 import { LanguageContext } from '../../contexts/LanguageContext';
-import { useAdminPanel } from '../../contexts/AdminPanelContext';
 
 import EventForm from '../Admin/SubComponents/EventForm';
 import EventList from '../Admin/SubComponents/EventList';
@@ -8,7 +7,7 @@ import ListaSubscritores from '../Admin/SubComponents/ListaSubscritores';
 
 export default function Admin() {
   const { t } = useContext(LanguageContext);
-  const { showAdmin, setShowAdmin } = useAdminPanel();
+  const { showdmin, setShowAdmin } = useAdminPanel();
   const adminRef = useRef(null);
   
   // Estado partilhado: A lista diz qual evento editar, o formulário recebe-o

@@ -27,6 +27,10 @@ const Event = sequelize.define('Event', {
         type: DataTypes.STRING,
         allowNull: false
     },
+    imagem: {
+        type: DataTypes.STRING,
+        allowNull: true
+    }
     }
     , {
         timestamps: true,});

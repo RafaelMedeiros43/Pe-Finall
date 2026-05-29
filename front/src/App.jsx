@@ -5,7 +5,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { ToastProvider } from './contexts/ToastContext';
-import { AdminPanelProvider } from './contexts/AdminPanelContext';
 import { EventosProvider } from './contexts/EventosContext';
 import { NewsletterProvider } from './contexts/NewsletterContext';
 
@@ -38,7 +37,6 @@ function App() {
     <ThemeProvider>
       <LanguageProvider>
         <ToastProvider>
-          <AdminPanelProvider>
             <EventosProvider>
               <NewsletterProvider>
                 <BrowserRouter>
@@ -77,7 +75,6 @@ function App() {
                 </BrowserRouter>
               </NewsletterProvider>
             </EventosProvider>
-          </AdminPanelProvider>
         </ToastProvider>
       </LanguageProvider>
     </ThemeProvider>

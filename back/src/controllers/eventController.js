@@ -2,14 +2,15 @@ const Event = require('../models/Event');
 
 createEvent = async (req, res) => {
     try {
-        const { titulo, descricao, data, hora, local } = req.body;
+        const { titulo, descricao, data, hora, local, imagem} = req.body;
 
         const newEvent = await Event.create({
             titulo,
             descricao,
             data,
             hora,
-            local
+            local,
+            imagem,
         });
 
         return res.status(201).json({ message: 'Evento criado com sucesso.', event: newEvent });
@@ -34,7 +35,7 @@ getAllEvents = async (req, res) => {
 updateEvent = async (req, res) => {
     try {
         const { id } = req.params;
-        const { titulo, descricao, data, hora, local } = req.body;
+        const { titulo, descricao, data, hora, local, imagem, clima } = req.body;
 
         const event = await Event.findByPk(id);
         if (!event) {
@@ -45,7 +46,8 @@ updateEvent = async (req, res) => {
             descricao: descricao || event.descricao,
             data: data || event.data,
             hora: hora || event.hora,
-            local: local || event.local
+            local: local || event.local,
+            imagem: imagem || event.imagem,
         });
         return res.status(200).json({ message: 'Evento atualizado com sucesso.', event });
     } catch (error) {

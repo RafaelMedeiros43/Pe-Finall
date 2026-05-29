@@ -65,7 +65,7 @@ export default function EventForm({ eventoParaEditar, limparEdicao }) {
   useEffect(() => {
     const fetchWeather = async () => {
       if (!lat || !lng || !dataEvento || !horaEvento) return;
-      const apiKey = typeof window !== 'undefined' && window.CONFIG ? window.CONFIG.WEATHER_API_KEY : '';
+      const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
       if (!apiKey) return;
 
       const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lng}&appid=${apiKey}&units=metric&lang=pt`;
@@ -122,7 +122,7 @@ export default function EventForm({ eventoParaEditar, limparEdicao }) {
     if (!dataEvento) { errors.dataEvento = 'Data obrigatória'; isValid = false; }
     if (!horaEvento.trim()) { errors.horaEvento = 'Hora obrigatória'; isValid = false; }
     if (!local.trim()) { errors.local = 'Local obrigatório'; isValid = false; }
-    if (!imagem.trim()) { errors.imagem = 'Imagem obrigatória'; isValid = false; }
+    if (!(imagem || '').trim()) { errors.imagem = 'Imagem obrigatória'; isValid = false; }
 
     if (!isValid) return setErrosForm(errors);
 

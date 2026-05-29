@@ -42,7 +42,7 @@ export function EventosProvider({ children }) {
         const isEdicao = !!evento.id;
         
         const url = isEdicao 
-          ? `http://localhost:5000/api/event/update/:${evento.id}`
+          ? `http://localhost:5000/api/event/update/${evento.id}`
           : `http://localhost:5000/api/event/create`;
           
         const method = isEdicao ? 'PUT' : 'POST';
@@ -57,7 +57,8 @@ export function EventosProvider({ children }) {
         });
 
         if (resposta.ok) {
-          await carregarEventos()
+          await carregarEventos();
+          resolve();
         } else {
           const erro = await resposta.json();
           reject(new Error(erro.message || 'Erro ao guardar evento'));

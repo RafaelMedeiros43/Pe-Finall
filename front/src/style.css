@@ -1231,7 +1231,7 @@ html[data-theme="dark"] .footer-bottom {
 /*
     MEDIA QUERIES
 */
-@media (max-width: 1200px) {
+@media (max-width: 1500px) {
     .header-text {
         display: none;
     }
