@@ -14,9 +14,8 @@ export default function AdminView() {
 
   useEffect(() => {
     const carregarEstatisticas = async () => {
-    const token = localStorage.getItem('token');
       try {
-        
+        const token = localStorage.getItem('token');
         if (!token) {
           navigate('/login');
           return;
