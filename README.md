@@ -30,7 +30,9 @@ Integrações: Implementação de serviços externos (Google Maps e Gnews) para 
 Back-end:
 Navega para a pasta caca-FinalBackEnd/.
 
-Instala dependências: npm install.
+Instala dependências: 
+npm install express sequelize mysql2 jsonwebtoken bcryptjs cors dotenv --save 
+npm install nodemon --save-dev..
 
 Configura o ficheiro .env com as tuas credenciais de base de dados.
 
@@ -39,7 +41,7 @@ Inicia o servidor: npm run dev.
 Front-end:
 Navega para a pasta do front-end.
 
-Instala dependências: npm install.
+Instala dependências: npm install d3.
 
 Inicia a aplicação: npm start.
 
