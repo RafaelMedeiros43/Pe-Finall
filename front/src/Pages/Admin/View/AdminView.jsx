@@ -14,8 +14,8 @@ export default function AdminView() {
 
   useEffect(() => {
     const carregarEstatisticas = async () => {
+    const token = localStorage.getItem('token');
       try {
-        const token = localStorage.getItem('token');
         
         if (!token) {
           navigate('/login');
@@ -30,16 +30,34 @@ export default function AdminView() {
           }
         });
 
+        const respostaEventos = await fetch('http://localhost:5000/api/event/all', {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        });
+
+        let contagemUsers = 0;
+        let contagemEventos = 0;
+
         if (respostaUsers.ok) {
           const users = await respostaUsers.json();
-          
-          setEstatisticas(prev => ({
-            ...prev,
-            totalUsuarios: users.length 
-          }));
+          contagemUsers = users.length;
         } else {
-          setErro('Não tens permissão para ver estes dados.');
+          setErro('Não tens permissão para ver os utilizadores.');
         }
+
+        if (respostaEventos.ok) {
+          const dadosEventos = await respostaEventos.json();
+          contagemEventos = dadosEventos.events.length
+        }
+
+        setEstatisticas(prev => ({
+          ...prev,
+          totalUsuarios: contagemUsers,
+          eventosAtivos: contagemEventos
+        }));
 
       } catch (error) {
         console.error("Erro ao carregar estatísticas:", error);
@@ -59,7 +77,7 @@ export default function AdminView() {
           <p>Bem-vindo ao painel de controlo do Centro Académico Clínico dos Açores.</p>
         </header>
 
-        {erro && <p>{erro}</p>}
+        {erro && <p style={{ color: '#ff4d4f', fontWeight: 'bold' }}>{erro}</p>}
 
         <section className={styles.statsGrid}>
           <div className={styles.statCard}>
@@ -72,10 +90,7 @@ export default function AdminView() {
             <p className={styles.numero}>{estatisticas.eventosAtivos}</p>
           </div>
           
-          <div className={styles.statCard}>
-            <h3>Novas Inscrições</h3>
-            <p className={styles.numero}>{estatisticas.novasInscricoes}</p>
-          </div>
+          
         </section>
 
         <section className={styles.actionsSection}>

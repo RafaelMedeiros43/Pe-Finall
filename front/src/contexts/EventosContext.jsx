@@ -6,20 +6,27 @@ export function EventosProvider({ children }) {
   const [eventos, setEventos] = useState([]);
 
   const carregarEventos = useCallback(async () => {
+    const token = localStorage.getItem('token');
     try {
       const resposta = await fetch('http://localhost:5000/api/event/all', {
         method: 'GET',
-        headers: { 'Content-Type': 'application/json' }
+        headers: { 'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+         }
+        
       });
 
       if (resposta.ok) {
           const dados = await resposta.json();
-          setEventos(dados)
+      
+          if (dados.events) {
+            setEventos(dados.events)
+          }
       } else {
-        console.error('Erro do servidor ao carregar eventos');
+        console.error('Erro do servidor ao carregar eventos')
       }
     } catch (error) {
-      console.error('Erro de ligação ao servidor:', error);
+      console.error('Erro de ligação ao servidor:', error)
     }
   }, []);
 

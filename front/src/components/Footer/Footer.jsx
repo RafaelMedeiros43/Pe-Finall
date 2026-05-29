@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import { LanguageContext } from '../../contexts/LanguageContext';
@@ -6,9 +6,35 @@ import NewsletterForm from '../Footer/SubComponents/NewsletterForm';
 
 export default function Footer() {
   const { t } = useContext(LanguageContext);
-  const utilizadorLogado = { nome: "João", role: "admin" };
+  
+  const [LoggedUser, setLoggedUser] = useState(null);
 
+  useEffect(() => {
+    const verificarPermissoes = async () => {
+      const token = localStorage.getItem('token');
+      
+      if (!token) return;
 
+      try {
+        const resposta = await fetch('http://localhost:5000/api/user/getprofile', {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        });
+
+        if (resposta.ok) {
+          const dados = await resposta.json();
+          setLoggedUser(dados)
+        }
+      } catch (error) {
+        console.error("Erro ao verificar permissões no Footer:", error);
+      }
+    };
+
+    verificarPermissoes();
+  }, []);
 
   return (
     <footer id="contactos" className="footer">
@@ -41,15 +67,18 @@ export default function Footer() {
       </div>
       
       <div className="container footer-bottom">
-        {utilizadorLogado && utilizadorLogado.role === 'admin' && (
-            <p>
-              &copy; 2026 Centro Académico Clínico dos Açores. Todos os direitos reservados.
+        <p>
+          &copy; 2026 Centro Académico Clínico dos Açores. Todos os direitos reservados.
+          
+          {LoggedUser?.role === 'admin' && (
+            <span>
               {' | '}
               <Link to="/admin" id="toggle-admin" aria-label="Alternar para painel de administração">
                 Admin
               </Link>
-            </p>
+            </span>
           )}
+        </p>
       </div>
     </footer>
   );
